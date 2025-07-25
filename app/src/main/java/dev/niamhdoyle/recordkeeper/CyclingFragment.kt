@@ -33,18 +33,18 @@ class CyclingFragment : Fragment() {
 
     private fun setupClickListeners() {
         vb.containerLongestRide.setOnClickListener {
-            launchRunningRecordScreen(getName(vb.textViewLongestRideHeading))
+            launchCyclingRecordScreen(getName(vb.textViewLongestRideHeading))
         }
         vb.containerBiggestClimb.setOnClickListener {
-            launchRunningRecordScreen(getName(vb.textViewBiggestClimbHeading))
+            launchCyclingRecordScreen(getName(vb.textViewBiggestClimbHeading))
         }
         vb.containerBestAvgSpeed.setOnClickListener {
-            launchRunningRecordScreen(getName(vb.textViewBestAvgSpeedHeading))
+            launchCyclingRecordScreen(getName(vb.textViewBestAvgSpeedHeading))
         }
     }
 
-    private fun launchRunningRecordScreen(recordName: String) {
-        val intent = Intent(context, EditRunningRecordActivity::class.java)
+    private fun launchCyclingRecordScreen(recordName: String) {
+        val intent = Intent(context, EditCyclingRecordActivity::class.java)
         intent.putExtra("distance", recordName)
         startActivity(intent)
     }
