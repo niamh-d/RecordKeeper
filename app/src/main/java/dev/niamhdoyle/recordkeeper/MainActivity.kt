@@ -1,6 +1,7 @@
 package dev.niamhdoyle.recordkeeper
 
 import android.os.Bundle
+import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.commit
@@ -20,19 +21,24 @@ class MainActivity : AppCompatActivity(), NavigationBarView.OnItemSelectedListen
         vb.bottomNav.setOnItemSelectedListener(this)
     }
 
-    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.toolbar, menu)
+        return true
+    }
+
+    override fun onNavigationItemSelected(item: MenuItem) =
         when (item.itemId) {
             R.id.nav_cycling -> {
                 onCyclingClicked()
-                return true
+                true
             }
             R.id.nav_running -> {
                 onRunningClicked()
-                return true
+                true
             }
-            else -> return false
+            else -> false
             }
-    }
+
 
     private fun onRunningClicked() {
         supportFragmentManager.commit { replace(R.id.fragment_container, RunningFragment()) }
