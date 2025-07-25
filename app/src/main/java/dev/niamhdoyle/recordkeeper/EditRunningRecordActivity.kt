@@ -17,8 +17,6 @@ class EditRunningRecordActivity : AppCompatActivity() {
 
         recordName = intent.getStringExtra("distance").toString()
 
-        setSupportActionBar(findViewById(R.id.toolbar))
-
         title = formatTitle()
     }
 

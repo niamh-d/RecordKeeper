@@ -16,7 +16,6 @@ class MainActivity : AppCompatActivity(), NavigationBarView.OnItemSelectedListen
 
         vb = ActivityMainBinding.inflate(layoutInflater)
         setContentView(vb.root)
-        setSupportActionBar(findViewById(R.id.toolbar))
 
         vb.bottomNav.setOnItemSelectedListener(this)
     }
