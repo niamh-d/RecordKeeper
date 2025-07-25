@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import dev.niamhdoyle.recordkeeper.databinding.FragmentRunningBinding
 
@@ -27,23 +28,28 @@ class RunningFragment : Fragment() {
         setupClickListeners()
     }
 
+    private fun getName(heading: TextView): String {
+        return heading.text.toString()
+    }
+
     private fun setupClickListeners() {
         vb.container5km.setOnClickListener {
-            launchRunningRecordScreen()
+            launchRunningRecordScreen(getName(vb.textView5kmHeading))
         }
         vb.container10km.setOnClickListener {
-            launchRunningRecordScreen()
+            launchRunningRecordScreen(getName(vb.textView10kmHeading))
         }
         vb.containerHalfMarathon.setOnClickListener {
-            launchRunningRecordScreen()
+            launchRunningRecordScreen(getName(vb.textViewHalfMarathonHeading))
         }
         vb.containerMarathon.setOnClickListener {
-            launchRunningRecordScreen()
+            launchRunningRecordScreen(getName(vb.textViewMarathonHeading))
         }
     }
 
-    private fun launchRunningRecordScreen() {
+    private fun launchRunningRecordScreen(recordName: String) {
         val intent = Intent(context, EditRunningRecordActivity::class.java)
+        intent.putExtra("distance", recordName)
         startActivity(intent)
     }
 }

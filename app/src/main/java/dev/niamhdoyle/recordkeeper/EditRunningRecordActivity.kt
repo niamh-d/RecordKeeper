@@ -7,6 +7,7 @@ import dev.niamhdoyle.recordkeeper.databinding.ActivityEditRunningRecordBinding
 class EditRunningRecordActivity : AppCompatActivity() {
 
     private lateinit var vb: ActivityEditRunningRecordBinding
+    private lateinit var recordName: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -14,8 +15,14 @@ class EditRunningRecordActivity : AppCompatActivity() {
         vb = ActivityEditRunningRecordBinding.inflate(layoutInflater)
         setContentView(vb.root)
 
+        recordName = intent.getStringExtra("distance").toString()
+
         setSupportActionBar(findViewById(R.id.toolbar))
 
-        title = "My custom title"
+        title = formatTitle()
+    }
+
+    private fun formatTitle(): String {
+        return "Edit $recordName record"
     }
 }
