@@ -1,4 +1,4 @@
-package dev.niamhdoyle.recordkeeper
+package dev.niamhdoyle.recordkeeper.running
 
 import android.content.Intent
 import android.os.Bundle

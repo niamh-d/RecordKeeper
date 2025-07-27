@@ -6,7 +6,9 @@ import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.commit
 import com.google.android.material.navigation.NavigationBarView
+import dev.niamhdoyle.recordkeeper.cycling.CyclingFragment
 import dev.niamhdoyle.recordkeeper.databinding.ActivityMainBinding
+import dev.niamhdoyle.recordkeeper.running.RunningFragment
 
 class MainActivity : AppCompatActivity(), NavigationBarView.OnItemSelectedListener {
 
@@ -25,6 +27,24 @@ class MainActivity : AppCompatActivity(), NavigationBarView.OnItemSelectedListen
         menuInflater.inflate(R.menu.toolbar, menu)
         return true
     }
+
+    override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
+            R.id.item_reset_running -> {
+                true
+            }
+
+            R.id.item_reset_cycling -> {
+                true
+            }
+
+            R.id.item_reset_all_records -> {
+                true
+            }
+
+            else -> {
+                super.onOptionsItemSelected(item)
+            }
+        }
 
     override fun onNavigationItemSelected(item: MenuItem) =
         when (item.itemId) {
