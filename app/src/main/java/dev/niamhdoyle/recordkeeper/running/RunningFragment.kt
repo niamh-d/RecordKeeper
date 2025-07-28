@@ -27,6 +27,10 @@ class RunningFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupClickListeners()
+    }
+
+    override fun onResume() {
+        super.onResume()
         displayRecords()
     }
 
@@ -36,10 +40,10 @@ class RunningFragment : Fragment() {
         vb.textView5kmDate.text = runningPreferences.getString("5km_date", null)
         vb.textView10kmValue.text = runningPreferences.getString("10km_record", null)
         vb.textView10kmDate.text = runningPreferences.getString("10km_date", null)
-        vb.textViewHalfMarathonValue.text = runningPreferences.getString("half_marathon_record", null)
-        vb.textViewHalfMarathonDate.text = runningPreferences.getString("half_marathon_date", null)
-        vb.textViewMarathonValue.text = runningPreferences.getString("marathon_record", null)
-        vb.textViewMarathonDate.text = runningPreferences.getString("marathon_date", null)
+        vb.textViewHalfMarathonValue.text = runningPreferences.getString("Half Marathon_record", null)
+        vb.textViewHalfMarathonDate.text = runningPreferences.getString("Half Marathon_date", null)
+        vb.textViewMarathonValue.text = runningPreferences.getString("Marathon_record", null)
+        vb.textViewMarathonDate.text = runningPreferences.getString("Marathon_date", null)
     }
 
     private fun getName(heading: TextView): String {
