@@ -1,7 +1,9 @@
 package dev.niamhdoyle.recordkeeper.running
 
+import android.content.Context
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.edit
 import dev.niamhdoyle.recordkeeper.databinding.ActivityEditRunningRecordBinding
 
 class EditRunningRecordActivity : AppCompatActivity() {
@@ -18,6 +20,21 @@ class EditRunningRecordActivity : AppCompatActivity() {
         recordName = intent.getStringExtra("distance").toString()
 
         title = formatTitle()
+
+        vb.buttonSave.setOnClickListener {
+            saveRecord(recordName)
+        }
+    }
+
+    private fun saveRecord(recordName: String?) {
+        val record = vb.editTextRecord.text.toString()
+        val date = vb.editTextDate.text.toString()
+
+        val runningPreferences = getSharedPreferences("running", Context.MODE_PRIVATE)
+        runningPreferences.edit {
+            putString("${recordName}_record", record)
+            putString("${recordName}_date", date)
+        }
     }
 
     private fun formatTitle(): String {
