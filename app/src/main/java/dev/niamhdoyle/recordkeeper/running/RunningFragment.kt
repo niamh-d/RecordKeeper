@@ -1,5 +1,6 @@
 package dev.niamhdoyle.recordkeeper.running
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -26,6 +27,19 @@ class RunningFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupClickListeners()
+        displayRecords()
+    }
+
+    private fun displayRecords() {
+        val runningPreferences = requireContext().getSharedPreferences("running", Context.MODE_PRIVATE)
+        vb.textView5kmValue.text = runningPreferences.getString("5km_record", null)
+        vb.textView5kmDate.text = runningPreferences.getString("5km_date", null)
+        vb.textView10kmValue.text = runningPreferences.getString("10km_record", null)
+        vb.textView10kmDate.text = runningPreferences.getString("10km_date", null)
+        vb.textViewHalfMarathonValue.text = runningPreferences.getString("half_marathon_record", null)
+        vb.textViewHalfMarathonDate.text = runningPreferences.getString("half_marathon_date", null)
+        vb.textViewMarathonValue.text = runningPreferences.getString("marathon_record", null)
+        vb.textViewMarathonDate.text = runningPreferences.getString("marathon_date", null)
     }
 
     private fun getName(heading: TextView): String {
