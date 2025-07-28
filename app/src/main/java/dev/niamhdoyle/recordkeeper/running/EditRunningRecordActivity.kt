@@ -21,9 +21,17 @@ class EditRunningRecordActivity : AppCompatActivity() {
 
         title = formatTitle()
 
+        displayRecord(recordName)
         vb.buttonSave.setOnClickListener {
             saveRecord(recordName)
+            finish()
         }
+    }
+
+    private fun displayRecord(recordName: String?) {
+        val runningPreferences = getSharedPreferences("running", Context.MODE_PRIVATE)
+        vb.editTextRecord.setText(runningPreferences.getString("${recordName}_record", null))
+        vb.editTextDate.setText(runningPreferences.getString("${recordName}_date", null))
     }
 
     private fun saveRecord(recordName: String?) {
