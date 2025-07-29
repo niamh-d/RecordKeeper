@@ -8,13 +8,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import dev.niamhdoyle.recordkeeper.MainActivity
 import dev.niamhdoyle.recordkeeper.databinding.FragmentCyclingBinding
 import dev.niamhdoyle.recordkeeper.editrecord.EditRecordActivity
 
 class CyclingFragment : Fragment() {
 
     private lateinit var vb: FragmentCyclingBinding
-    private val activityName = "cycling"
+    private val activityName = MainActivity.ActivityTypeE.CYCLING
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -63,7 +64,7 @@ class CyclingFragment : Fragment() {
 
     private fun launchCyclingRecordScreen(recordName: String, recordFieldHint: String) {
         val intent = Intent(context, EditRecordActivity::class.java)
-        intent.putExtra("screen_data", EditRecordActivity.ScreenData(recordName, activityName, recordFieldHint))
+        intent.putExtra("screen_data", EditRecordActivity.ScreenData(recordName, activityName.value, recordFieldHint))
         startActivity(intent)
     }
 }
