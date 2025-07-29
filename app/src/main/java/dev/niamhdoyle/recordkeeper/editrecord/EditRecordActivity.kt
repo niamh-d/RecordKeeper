@@ -1,6 +1,7 @@
 package dev.niamhdoyle.recordkeeper.editrecord
 
 import android.content.Context
+import android.os.Build
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.edit
@@ -11,7 +12,13 @@ class EditRecordActivity : AppCompatActivity() {
 
     private lateinit var vb: ActivityEditRecordBinding
     private val screenData by lazy {
-        intent.getSerializableExtra("screen_data") as ScreenData
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            intent.getSerializableExtra("screen_data", ScreenData::class.java) as ScreenData
+        } else {
+            @Suppress("DEPRECATION")
+            intent.getSerializableExtra("screen_data") as ScreenData
+        }
     }
     private val recordPreferences by lazy { getSharedPreferences(screenData.sharedPreferences, Context.MODE_PRIVATE) }
 
