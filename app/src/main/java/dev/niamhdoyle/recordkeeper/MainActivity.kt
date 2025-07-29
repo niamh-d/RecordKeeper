@@ -9,13 +9,14 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.edit
 import androidx.fragment.app.commit
 import com.google.android.material.navigation.NavigationBarView
+import com.google.android.material.snackbar.Snackbar
 import dev.niamhdoyle.recordkeeper.cycling.CyclingFragment
 import dev.niamhdoyle.recordkeeper.databinding.ActivityMainBinding
 import dev.niamhdoyle.recordkeeper.running.RunningFragment
 
 class MainActivity : AppCompatActivity(), NavigationBarView.OnItemSelectedListener {
 
-    enum class ActivityTypeE(val value: String) {RUNNING("running"), CYCLING("cycling"), ALL("all")}
+    enum class ActivityTypeE(val value: String) { RUNNING("running"), CYCLING("cycling"), ALL("all") }
 
     private lateinit var vb: ActivityMainBinding
 
@@ -45,17 +46,23 @@ class MainActivity : AppCompatActivity(), NavigationBarView.OnItemSelectedListen
         }
     }
 
+    private fun showSnackbar() {
+        val snackbar = Snackbar.make(
+            vb.fragmentContainer,
+            "Records cleared successfully!",
+            Snackbar.LENGTH_LONG
+        )
+        snackbar.anchorView = vb.bottomNav
+        snackbar.show()
+    }
+
     private fun confirmationDialogPopup(type: ActivityTypeE) {
         AlertDialog.Builder(this)
             .setTitle("Reset ${type.value} records")
             .setMessage("Are you sure? This action cannot be undone.")
             .setPositiveButton("Yes, I'm sure") { _, _ ->
-
-                if (type == ActivityTypeE.ALL) {
-                    clearRecords(ActivityTypeE.RUNNING)
-                    clearRecords(ActivityTypeE.CYCLING)
-                } else clearRecords(type)
-
+                clearRecords(type)
+                showSnackbar()
                 refreshFragment()
             }
             .setNegativeButton("Cancel", null)
@@ -93,12 +100,14 @@ class MainActivity : AppCompatActivity(), NavigationBarView.OnItemSelectedListen
                 onCyclingClicked()
                 true
             }
+
             R.id.nav_running -> {
                 onRunningClicked()
                 true
             }
+
             else -> false
-            }
+        }
 
 
     private fun onRunningClicked() {
