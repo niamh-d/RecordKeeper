@@ -25,7 +25,9 @@ class EditRecordActivity : AppCompatActivity() {
     }
 
     private fun setupUi() {
-        title = formatTitle()
+        title = "Edit ${screenData.record} record"
+        vb.textInputRecord.hint = screenData.recordFieldHint
+
         vb.buttonSave.setOnClickListener {
             saveRecord()
             finish()
@@ -56,10 +58,6 @@ class EditRecordActivity : AppCompatActivity() {
             remove("${screenData.record}_record")
             remove("${screenData.record}_date")
         }
-    }
-
-    private fun formatTitle(): String {
-        return "Edit ${screenData.record} record"
     }
 
     data class ScreenData (

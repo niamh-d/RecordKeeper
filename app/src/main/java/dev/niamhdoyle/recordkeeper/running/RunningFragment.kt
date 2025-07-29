@@ -9,10 +9,12 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import dev.niamhdoyle.recordkeeper.databinding.FragmentRunningBinding
+import dev.niamhdoyle.recordkeeper.editrecord.EditRecordActivity
 
 class RunningFragment : Fragment() {
 
     private lateinit var vb: FragmentRunningBinding
+    private val activityType = "running"
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -65,9 +67,10 @@ class RunningFragment : Fragment() {
         }
     }
 
-    private fun launchRunningRecordScreen(recordName: String) {
-        val intent = Intent(context, EditRunningRecordActivity::class.java)
-        intent.putExtra("distance", recordName)
+    private fun launchRunningRecordScreen(distance: String) {
+        val intent = Intent(context, EditRecordActivity::class.java)
+
+        intent.putExtra("screen_data", EditRecordActivity.ScreenData(distance, activityType, "Time"))
         startActivity(intent)
     }
 }
