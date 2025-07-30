@@ -8,16 +8,18 @@ import androidx.core.content.edit
 import dev.niamhdoyle.recordkeeper.databinding.ActivityEditRecordBinding
 import java.io.Serializable
 
+const val INTENT_EXTRA_SCREEN_DATA = "screen_data"
+
 class EditRecordActivity : AppCompatActivity() {
 
     private lateinit var vb: ActivityEditRecordBinding
     private val screenData by lazy {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            intent.getSerializableExtra("screen_data", ScreenData::class.java) as ScreenData
+            intent.getSerializableExtra(INTENT_EXTRA_SCREEN_DATA, ScreenData::class.java) as ScreenData
         } else {
             @Suppress("DEPRECATION")
-            intent.getSerializableExtra("screen_data") as ScreenData
+            intent.getSerializableExtra(INTENT_EXTRA_SCREEN_DATA) as ScreenData
         }
     }
     private val recordPreferences by lazy { getSharedPreferences(screenData.sharedPreferences, Context.MODE_PRIVATE) }

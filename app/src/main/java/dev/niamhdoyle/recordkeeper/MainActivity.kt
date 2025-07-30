@@ -1,6 +1,5 @@
 package dev.niamhdoyle.recordkeeper
 
-import android.content.Context
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -62,8 +61,8 @@ class MainActivity : AppCompatActivity(), NavigationBarView.OnItemSelectedListen
             .setMessage("Are you sure? This action cannot be undone.")
             .setPositiveButton("Yes, I'm sure") { _, _ ->
                 clearRecords(type)
-                showSnackbar()
                 refreshFragment()
+                showSnackbar()
             }
             .setNegativeButton("Cancel", null)
             .show()

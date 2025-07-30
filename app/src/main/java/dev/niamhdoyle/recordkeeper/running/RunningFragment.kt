@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import dev.niamhdoyle.recordkeeper.MainActivity
 import dev.niamhdoyle.recordkeeper.databinding.FragmentRunningBinding
 import dev.niamhdoyle.recordkeeper.editrecord.EditRecordActivity
+import dev.niamhdoyle.recordkeeper.editrecord.INTENT_EXTRA_SCREEN_DATA
 
 class RunningFragment : Fragment() {
 
@@ -71,7 +72,7 @@ class RunningFragment : Fragment() {
     private fun launchRunningRecordScreen(distance: String) {
         val intent = Intent(context, EditRecordActivity::class.java)
 
-        intent.putExtra("screen_data", EditRecordActivity.ScreenData(distance, activityType.value, "Time"))
+        intent.putExtra(INTENT_EXTRA_SCREEN_DATA, EditRecordActivity.ScreenData(distance, activityType.value, "Time"))
         startActivity(intent)
     }
 }
