@@ -8,8 +8,6 @@ import androidx.core.content.edit
 import dev.niamhdoyle.recordkeeper.databinding.ActivityEditRecordBinding
 import java.io.Serializable
 
-const val INTENT_EXTRA_SCREEN_DATA = "screen_data"
-
 class EditRecordActivity : AppCompatActivity() {
 
     private lateinit var vb: ActivityEditRecordBinding
@@ -48,8 +46,8 @@ class EditRecordActivity : AppCompatActivity() {
     }
 
     private fun displayRecord() {
-        vb.editTextRecord.setText(recordPreferences.getString("${screenData.record}_record", null))
-        vb.editTextDate.setText(recordPreferences.getString("${screenData.record}_date", null))
+        vb.editTextRecord.setText(recordPreferences.getString("${screenData.record}_$SHARED_PREFERENCES_RECORD_KEY", null))
+        vb.editTextDate.setText(recordPreferences.getString("${screenData.record}_$SHARED_PREFERENCES_DATE_KEY", null))
     }
 
     private fun saveRecord() {
@@ -57,15 +55,15 @@ class EditRecordActivity : AppCompatActivity() {
         val date = vb.editTextDate.text.toString()
 
         recordPreferences.edit {
-            putString("${screenData.record}_record", record)
-            putString("${screenData.record}_date", date)
+            putString("${screenData.record}_$SHARED_PREFERENCES_RECORD_KEY", record)
+            putString("${screenData.record}_$SHARED_PREFERENCES_DATE_KEY", date)
         }
     }
 
     private fun clearRecord() {
         recordPreferences.edit {
-            remove("${screenData.record}_record")
-            remove("${screenData.record}_date")
+            remove("${screenData.record}_$SHARED_PREFERENCES_RECORD_KEY")
+            remove("${screenData.record}_$SHARED_PREFERENCES_DATE_KEY")
         }
     }
 
@@ -74,4 +72,10 @@ class EditRecordActivity : AppCompatActivity() {
         val sharedPreferences: String,
         val recordFieldHint: String
     ) : Serializable
+
+    companion object {
+        const val INTENT_EXTRA_SCREEN_DATA = "screen_data"
+        const val SHARED_PREFERENCES_RECORD_KEY = "record"
+        const val SHARED_PREFERENCES_DATE_KEY = "date"
+    }
 }

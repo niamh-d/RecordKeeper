@@ -11,7 +11,7 @@ import androidx.fragment.app.Fragment
 import dev.niamhdoyle.recordkeeper.MainActivity
 import dev.niamhdoyle.recordkeeper.databinding.FragmentRunningBinding
 import dev.niamhdoyle.recordkeeper.editrecord.EditRecordActivity
-import dev.niamhdoyle.recordkeeper.editrecord.INTENT_EXTRA_SCREEN_DATA
+import dev.niamhdoyle.recordkeeper.editrecord.EditRecordActivity.Companion.INTENT_EXTRA_SCREEN_DATA
 
 class RunningFragment : Fragment() {
 
@@ -39,15 +39,15 @@ class RunningFragment : Fragment() {
     }
 
     private fun displayRecords() {
-        val runningPreferences = requireContext().getSharedPreferences("running", Context.MODE_PRIVATE)
-        vb.textView5kmValue.text = runningPreferences.getString("5km_record", null)
-        vb.textView5kmDate.text = runningPreferences.getString("5km_date", null)
-        vb.textView10kmValue.text = runningPreferences.getString("10km_record", null)
-        vb.textView10kmDate.text = runningPreferences.getString("10km_date", null)
-        vb.textViewHalfMarathonValue.text = runningPreferences.getString("Half Marathon_record", null)
-        vb.textViewHalfMarathonDate.text = runningPreferences.getString("Half Marathon_date", null)
-        vb.textViewMarathonValue.text = runningPreferences.getString("Marathon_record", null)
-        vb.textViewMarathonDate.text = runningPreferences.getString("Marathon_date", null)
+        val runningPreferences = requireContext().getSharedPreferences(activityType.value, Context.MODE_PRIVATE)
+        vb.textView5kmValue.text = runningPreferences.getString("${FIVE_K}_${EditRecordActivity.SHARED_PREFERENCES_RECORD_KEY}", null)
+        vb.textView5kmDate.text = runningPreferences.getString("${FIVE_K}_${EditRecordActivity.SHARED_PREFERENCES_DATE_KEY}", null)
+        vb.textView10kmValue.text = runningPreferences.getString("${TEN_K}_${EditRecordActivity.SHARED_PREFERENCES_RECORD_KEY}", null)
+        vb.textView10kmDate.text = runningPreferences.getString("${TEN_K}_${EditRecordActivity.SHARED_PREFERENCES_DATE_KEY}", null)
+        vb.textViewHalfMarathonValue.text = runningPreferences.getString("${HALF_MARATHON}_${EditRecordActivity.SHARED_PREFERENCES_RECORD_KEY}", null)
+        vb.textViewHalfMarathonDate.text = runningPreferences.getString("${HALF_MARATHON}_${EditRecordActivity.SHARED_PREFERENCES_DATE_KEY}", null)
+        vb.textViewMarathonValue.text = runningPreferences.getString("${MARATHON}_${EditRecordActivity.SHARED_PREFERENCES_RECORD_KEY}", null)
+        vb.textViewMarathonDate.text = runningPreferences.getString("${MARATHON}_${EditRecordActivity.SHARED_PREFERENCES_DATE_KEY}", null)
     }
 
     private fun getName(heading: TextView): String {
@@ -74,5 +74,12 @@ class RunningFragment : Fragment() {
 
         intent.putExtra(INTENT_EXTRA_SCREEN_DATA, EditRecordActivity.ScreenData(distance, activityType.value, "Time"))
         startActivity(intent)
+    }
+
+    companion object {
+        const val TEN_K = "10km"
+        const val FIVE_K = "5km"
+        const val HALF_MARATHON = "Half Marathon"
+        const val MARATHON = "Marathon"
     }
 }

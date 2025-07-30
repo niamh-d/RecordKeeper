@@ -33,9 +33,14 @@ class MainActivity : AppCompatActivity(), NavigationBarView.OnItemSelectedListen
         return true
     }
 
-    private fun clearRecords(type: ActivityTypeE) {
-        getSharedPreferences(type.value, MODE_PRIVATE).edit { clear() }
-    }
+    private fun clearRecords(type: ActivityTypeE) = when (type) {
+            ActivityTypeE.ALL -> {
+                getSharedPreferences(ActivityTypeE.RUNNING.value, MODE_PRIVATE).edit { clear() }
+                getSharedPreferences(ActivityTypeE.CYCLING.value, MODE_PRIVATE).edit { clear() }
+            }
+            else -> getSharedPreferences(type.value, MODE_PRIVATE).edit { clear() }
+        }
+
 
     private fun refreshFragment() {
         when (vb.bottomNav.selectedItemId) {
