@@ -3,6 +3,8 @@ package dev.niamhdoyle.recordkeeper.editrecord
 import android.content.Context
 import android.os.Build
 import android.os.Bundle
+import android.view.MenuItem
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.edit
 import dev.niamhdoyle.recordkeeper.databinding.ActivityEditRecordBinding
@@ -14,13 +16,21 @@ class EditRecordActivity : AppCompatActivity() {
     private val screenData by lazy {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            intent.getSerializableExtra(INTENT_EXTRA_SCREEN_DATA, ScreenData::class.java) as ScreenData
+            intent.getSerializableExtra(
+                INTENT_EXTRA_SCREEN_DATA,
+                ScreenData::class.java
+            ) as ScreenData
         } else {
             @Suppress("DEPRECATION")
             intent.getSerializableExtra(INTENT_EXTRA_SCREEN_DATA) as ScreenData
         }
     }
-    private val recordPreferences by lazy { getSharedPreferences(screenData.sharedPreferences, Context.MODE_PRIVATE) }
+    private val recordPreferences by lazy {
+        getSharedPreferences(
+            screenData.sharedPreferences,
+            Context.MODE_PRIVATE
+        )
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,6 +39,17 @@ class EditRecordActivity : AppCompatActivity() {
         setContentView(vb.root)
         setupUi()
         displayRecord()
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+
+        when (item.itemId) {
+            android.R.id.home -> {
+                onBackPressedDispatcher.onBackPressed()
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     private fun setupUi() {
@@ -46,8 +67,18 @@ class EditRecordActivity : AppCompatActivity() {
     }
 
     private fun displayRecord() {
-        vb.editTextRecord.setText(recordPreferences.getString("${screenData.record}_$SHARED_PREFERENCES_RECORD_KEY", null))
-        vb.editTextDate.setText(recordPreferences.getString("${screenData.record}_$SHARED_PREFERENCES_DATE_KEY", null))
+        vb.editTextRecord.setText(
+            recordPreferences.getString(
+                "${screenData.record}_$SHARED_PREFERENCES_RECORD_KEY",
+                null
+            )
+        )
+        vb.editTextDate.setText(
+            recordPreferences.getString(
+                "${screenData.record}_$SHARED_PREFERENCES_DATE_KEY",
+                null
+            )
+        )
     }
 
     private fun saveRecord() {
@@ -67,7 +98,7 @@ class EditRecordActivity : AppCompatActivity() {
         }
     }
 
-    data class ScreenData (
+    data class ScreenData(
         val record: String,
         val sharedPreferences: String,
         val recordFieldHint: String

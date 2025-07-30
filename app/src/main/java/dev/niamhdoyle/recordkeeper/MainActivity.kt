@@ -34,12 +34,13 @@ class MainActivity : AppCompatActivity(), NavigationBarView.OnItemSelectedListen
     }
 
     private fun clearRecords(type: ActivityTypeE) = when (type) {
-            ActivityTypeE.ALL -> {
-                getSharedPreferences(ActivityTypeE.RUNNING.value, MODE_PRIVATE).edit { clear() }
-                getSharedPreferences(ActivityTypeE.CYCLING.value, MODE_PRIVATE).edit { clear() }
-            }
-            else -> getSharedPreferences(type.value, MODE_PRIVATE).edit { clear() }
+        ActivityTypeE.ALL -> {
+            getSharedPreferences(ActivityTypeE.RUNNING.value, MODE_PRIVATE).edit { clear() }
+            getSharedPreferences(ActivityTypeE.CYCLING.value, MODE_PRIVATE).edit { clear() }
         }
+
+        else -> getSharedPreferences(type.value, MODE_PRIVATE).edit { clear() }
+    }
 
 
     private fun refreshFragment() {

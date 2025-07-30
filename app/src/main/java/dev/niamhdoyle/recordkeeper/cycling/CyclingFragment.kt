@@ -38,14 +38,33 @@ class CyclingFragment : Fragment() {
     }
 
     private fun displayRecords() {
-        val runningPreferences = requireContext().getSharedPreferences(activityName.value, Context.MODE_PRIVATE)
+        val runningPreferences =
+            requireContext().getSharedPreferences(activityName.value, Context.MODE_PRIVATE)
 
-        vb.textViewLongestRideValue.text = runningPreferences.getString("${LONGEST_RIDE}_${EditRecordActivity.SHARED_PREFERENCES_RECORD_KEY}", null)
-        vb.textViewBiggestClimbValue.text = runningPreferences.getString("${BIGGEST_CLIMB}_${EditRecordActivity.SHARED_PREFERENCES_RECORD_KEY}", null)
-        vb.textViewBestAvgSpeedValue.text = runningPreferences.getString("${BEST_AVG_SPEED}_${EditRecordActivity.SHARED_PREFERENCES_RECORD_KEY}", null)
-        vb.textViewLongestRideDate.text = runningPreferences.getString("${LONGEST_RIDE}_${EditRecordActivity.SHARED_PREFERENCES_DATE_KEY}", null)
-        vb.textViewBiggestClimbDate.text = runningPreferences.getString("${BIGGEST_CLIMB}_${EditRecordActivity.SHARED_PREFERENCES_DATE_KEY}", null)
-        vb.textViewBestAvgSpeedDate.text = runningPreferences.getString("${BEST_AVG_SPEED}_${EditRecordActivity.SHARED_PREFERENCES_DATE_KEY}", null)
+        vb.textViewLongestRideValue.text = runningPreferences.getString(
+            "${LONGEST_RIDE}_${EditRecordActivity.SHARED_PREFERENCES_RECORD_KEY}",
+            null
+        )
+        vb.textViewBiggestClimbValue.text = runningPreferences.getString(
+            "${BIGGEST_CLIMB}_${EditRecordActivity.SHARED_PREFERENCES_RECORD_KEY}",
+            null
+        )
+        vb.textViewBestAvgSpeedValue.text = runningPreferences.getString(
+            "${BEST_AVG_SPEED}_${EditRecordActivity.SHARED_PREFERENCES_RECORD_KEY}",
+            null
+        )
+        vb.textViewLongestRideDate.text = runningPreferences.getString(
+            "${LONGEST_RIDE}_${EditRecordActivity.SHARED_PREFERENCES_DATE_KEY}",
+            null
+        )
+        vb.textViewBiggestClimbDate.text = runningPreferences.getString(
+            "${BIGGEST_CLIMB}_${EditRecordActivity.SHARED_PREFERENCES_DATE_KEY}",
+            null
+        )
+        vb.textViewBestAvgSpeedDate.text = runningPreferences.getString(
+            "${BEST_AVG_SPEED}_${EditRecordActivity.SHARED_PREFERENCES_DATE_KEY}",
+            null
+        )
     }
 
     private fun getName(heading: TextView): String {
@@ -66,7 +85,10 @@ class CyclingFragment : Fragment() {
 
     private fun launchCyclingRecordScreen(recordName: String, recordFieldHint: String) {
         val intent = Intent(context, EditRecordActivity::class.java)
-        intent.putExtra(INTENT_EXTRA_SCREEN_DATA, EditRecordActivity.ScreenData(recordName, activityName.value, recordFieldHint))
+        intent.putExtra(
+            INTENT_EXTRA_SCREEN_DATA,
+            EditRecordActivity.ScreenData(recordName, activityName.value, recordFieldHint)
+        )
         startActivity(intent)
     }
 
